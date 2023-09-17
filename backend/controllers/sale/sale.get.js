@@ -3,7 +3,7 @@ import SubscriptionSale from '../../model/subscription-sale.js';
 const GET__Sale = async (req, res) => {
     try {
         const currentDate = new Date();
-        const lastSixMonths = new Date(currentDate.getFullYear(), currentDate.getMonth() - 5, 1);
+        const lastSixMonths = new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, 1);
 
         const sales = await SubscriptionSale.aggregate([
             {

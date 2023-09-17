@@ -1,11 +1,16 @@
 import express from "express";
 import bodyParser from 'body-parser';
-import SaleRouter from "./controllers/sale/routes.js";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
+
+import SaleRouter from "./controllers/sale/routes.js";
 import RatingRouter from "./controllers/rating/routes.js";
+import { Configuration } from "./singleton/configuration.js";
+
 const app = express()
-const port = 3000;
+const port = Configuration.get("app-port");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -14,7 +19,7 @@ app.use(cors())
 app.use('/sale', SaleRouter);
 app.use('/rating', RatingRouter);
 
-mongoose.connect('mongodb://localhost:27017/subscription_sales_db', {
+mongoose.connect(Configuration.get("mongodb.url"), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
