@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- Freshdesk interview assignment -->
+
+<html lang="en">
+  <head>
+    <title>A Template App</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script async src="{{{appclient}}}"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="header">
+        <img
+          class="mini-logo"
+          height="24"
+          width="auto"
+          src="https://static-00.iconduck.com/assets.00/cred-icon-1740x2048-q1yyh1es.png"
+        />
+        <div class="greeting-container">
+          <h2 class="greeting"></h2>
+          Welcome to CRED dashboard
+        </div>
+      </div>
+      <div class="page">
+        <div class="metrics-container">
+          <div class="metric">
+            <h4 class="metric-header">Total Tickets</h4>
+            <div class="metric-value">19</div>
+          </div>
+          <div class="metric">
+            <h4 class="metric-header">Open Tickets</h4>
+            <div class="metric-value">3</div>
+          </div>
+          <div class="metric">
+            <h4 class="metric-header">Resolved Tickets</h4>
+            <div class="metric-value">16</div>
+          </div>
+          <div class="metric">
+            <h4 class="metric-header">Average Resolution Time</h4>
+            <div class="metric-value">2.38 min</div>
+          </div>
+        </div>
+        <div class="card kyc-container">
+          <div class="loading"></div>
+        </div>
+        <div class="card stats-container">
+          <div class="loading"></div>
+        </div>
+        <div class="card ratings-container">
+          <div class="loading"></div>
+        </div>
+        <div class="card ticket-container">
+          <div class="loading"></div>
+        </div>
+        <div class="card transactions-container">
+          <div class="loading"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- TEMPLATES -->
+  <template id="kyc-item-template">
+    <div class="kyc-item">
+      <img class="avatar" width="44" src="${avatarUrl}" />
+      <div class="kyc-info">
+        <div class="title">
+          <a class="ticket-id"> #${ticketId} </a>
+          ${userFullName}
+        </div>
+        <div class="description">${userEmail}</div>
+        <div class="description">${userPhone}</div>
+      </div>
+    </div>
+    <button class="cta-button">
+      <i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;Start KYC
+    </button>
+  </template>
+
+  <template id="ticket-item-template">
+    <div class="ticket-item">
+      <div class="title">
+        <a class="ticket-id"> <b>#${ticketId}</b> </a>
+        ${ticketTitle}
+      </div>
+      <div class="description">${ticketType}</div>
+    </div>
+  </template>
+
+  <template id="transaction-item-template">
+    <div class="transaction-item">
+      <div class="title ${type}">
+        <span
+          >${name}
+          <div class="description">${amount}</div></span
+        >
+        <span>
+          <a class="transaction-id">#${transactionId}</a>
+          <div class="date">${date}</div>
+        </span>
+      </div>
+    </div>
+  </template>
+
+  <template id="stats-template">
+    <h2 class="section-heading">
+      Monthly Performance - Conversions to CRED Pay
+    </h2>
+    <canvas id="stats-chart"></canvas>
+  </template>
+
+  <template id="ratings-template">
+    <h2 class="section-heading">Customer Feedback</h2>
+    <canvas id="ratings-chart"></canvas>
+  </template>
+
+  <script defer src="scripts/app.js"></script>
+  <script
+    async
+    type="module"
+    src="https://unpkg.com/@freshworks/crayons@3/dist/crayons/crayons.esm.js"
+  ></script>
+  <script
+    async
+    nomodule
+    src="https://unpkg.com/@freshworks/crayons@3/dist/crayons/crayons.js"
+  ></script>
+</html>

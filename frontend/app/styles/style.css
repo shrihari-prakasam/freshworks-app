@@ -1,0 +1,250 @@
+/* Freshdesk interview assignment */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --primary_color: #3c759e;
+  --surface_color: #fff;
+  --text_on_primary: #fff;
+  --text_on_button: #333;
+  --border_color: #ddd;
+  --border_radius: 15px;
+  --box_shadow: rgba(18, 52, 77, 0.2) 0px 1px 3px 0px;
+  --chart-color-1: var(--primary_color);
+}
+
+html {
+  box-sizing: border-box;
+  background-color: rgb(235, 239, 243);
+  font-size: 14px;
+}
+
+*,
+*:after,
+*::before {
+  box-sizing: inherit;
+}
+
+.main {
+  font-family: Poppins;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+.loading {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--primary_color);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.metrics-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.metric {
+  width: 17rem;
+  height: 8rem;
+  margin: 1rem;
+  border-radius: var(--border_radius);
+  background-color: var(--primary_color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--text_on_primary);
+}
+
+.metric .metric-header {
+  margin: 1rem;
+}
+
+.metric .metric-value {
+  font-size: 2rem;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header .mini-logo {
+  margin: 0 0.75rem;
+}
+
+.greeting-container {
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting {
+  margin: 0;
+}
+
+.page {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-heading {
+  font-size: 1.1rem;
+  margin: 1rem 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  margin: 1rem;
+  /* border: 1px solid var(--border_color); */
+  border-radius: var(--border_radius);
+  background-color: var(--surface_color);
+  box-shadow: var(--box_shadow);
+}
+.ratings-container {
+  width: 20%;
+}
+
+#ratings-chart {
+  margin: 1rem;
+  max-height: 300px;
+}
+
+.stats-container {
+  flex: 1;
+}
+
+#stats-chart {
+  margin: 1rem;
+  max-height: 300px;
+}
+
+.kyc-container {
+  min-width: 30%;
+}
+
+.ticket-container {
+  min-width: 50%;
+}
+
+.ticket-item {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.kyc-item-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kyc-item {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.kyc-item .ticket-id {
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.kyc-item .title {
+  font-size: 1rem;
+}
+
+.kyc-item .description,
+.ticket-item .description {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.kyc-item .avatar {
+  margin-right: 1rem;
+  border-radius: 100%;
+}
+
+.transactions-container {
+  flex: 1;
+}
+
+.transaction-id {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.transaction-item {
+  width: 100%;
+  padding: 1rem;
+}
+
+.transaction-item .date {
+  font-size: 1rem;
+}
+
+.transaction-item .title {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cta-button {
+  justify-self: flex-end;
+  border: none;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border_radius);
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary_color);
+  color: var(--text_on_primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.cta-button:hover {
+  border-radius: calc(var(--border_radius) - 10px);
+  filter: brightness(1.2);
+}
+
+@media screen and (max-width: 900px) {
+  .kyc-container {
+    width: 100%;
+  }
+}

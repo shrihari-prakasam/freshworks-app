@@ -1,0 +1,32 @@
+{
+  "api_key": {
+    "display_name": "api_key",
+    "description": "Enter your BASE 64 ENCODED api key",
+    "type": "api_key",
+    "secure": true,
+    "required": true,
+    "type_attributes": {
+      "product": "freshdesk"
+    }
+  },
+  "domain": {
+    "display_name": "domain",
+    "description": "Enter your freshdesk domain",
+    "type": "text",
+    "secure": false,
+    "required": true,
+    "type_attributes": {
+      "product": "freshdesk"
+    }
+  },
+  "backend_domain": {
+    "display_name": "backend_domain",
+    "description": "Enter your backend domain",
+    "type": "text",
+    "secure": false,
+    "required": true,
+    "type_attributes": {
+      "product": "freshdesk"
+    }
+  }
+}

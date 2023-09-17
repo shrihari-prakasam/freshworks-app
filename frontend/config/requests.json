@@ -1,0 +1,51 @@
+{
+  "getTickets": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.domain %>.freshdesk.com",
+      "path": "/api/v2/tickets",
+      "headers": {
+        "Authorization": "Bearer <%= iparam.api_key %>",
+        "Content-Type": "application/json"
+      },
+      "query": {
+        "page": "<%= context.page %>",
+        "per_page": "20"
+      }
+    },
+    "options": {
+      "retryDelay": 1000
+    }
+  },
+  "filterTickets": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.domain %>.freshdesk.com",
+      "path": "/api/v2/search/tickets",
+      "headers": {
+        "Authorization": "Bearer <%= iparam.api_key %>",
+        "Content-Type": "application/json"
+      },
+      "query": {
+        "query": "<%= context.query %>"
+      }
+    },
+    "options": {
+      "retryDelay": 1000
+    }
+  },
+  "getContact": {
+    "schema": {
+      "method": "GET",
+      "host": "<%= iparam.domain %>.freshdesk.com",
+      "path": "/api/v2/contacts/<%= context.contact_id %>",
+      "headers": {
+        "Authorization": "Bearer <%= iparam.api_key %>",
+        "Content-Type": "application/json"
+      }
+    },
+    "options": {
+      "retryDelay": 1000
+    }
+  }
+}

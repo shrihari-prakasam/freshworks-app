@@ -1,0 +1,5 @@
+node_modules
+.fdk
+coverage
+logger
+.report.json
