@@ -33,4 +33,5 @@ MONGODB_URL=your_mongodb_url
 1. Run command `cd frontend`.
 2. Run `fdk run`.
 3. Go to `http://localhost:10001/custom_configs` and input your parameters. Hit install.
-4. 
+4. Now append `?dev=true` to your Freshworks instance URL and click on the app icon.
+5. You should now see the dashboard.
