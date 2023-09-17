@@ -7,7 +7,8 @@ init();
 const NO_AVATAR_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg";
 const MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-function compileTemplate(str, obj) { return str.replace(/\${(.*?)}/g, (x, g) => obj[g]) };
+// Somewhere from StackOverflow... To replace variables in the format ${name} with the value of it.
+function compileTemplate(str, obj) { return str.replace(/\${(.*?)}/g, (_, g) => obj[g]) };
 
 async function init() {
   client = await app.initialized();
@@ -16,28 +17,32 @@ async function init() {
 
 async function initialize() {
   try {
-    const data = await client.data.get("loggedInUser");
-    console.log("Logged in user is", data);
-    const textElement = document.querySelector('.greeting');
-    textElement.innerHTML = `Hello, ${data.loggedInUser.contact.name}!`;
-    populateKycTickets();
-    drawPerformanceGraph();
-    drawRatingGraph();
-    getTicketsToday();
-    renderPaymentsData();
+    renderGreeting();
+    renderKYC();
+    renderCREDPayConversions();
+    renderRatings();
+    renderCurrentTickets();
+    renderPaymentList();
   } catch (error) {
     console.error(error);
   }
 }
 
-async function getTicketsToday() {
+async function renderGreeting() {
+  const data = await client.data.get("loggedInUser");
+  console.log("Logged in user is", data);
+  const textElement = document.querySelector('.greeting');
+  textElement.innerHTML = `Hello, ${data.loggedInUser.contact.name}!`;
+}
+
+async function renderCurrentTickets() {
   // The error from API is very, very generic. I have no idea what's wrong with my query.
   // So I instead just used the usual tickets API and filtered them out myself :(.
 
   /* const today = new Date();
   today.setDate(new Date().getDate() - 1);
   const result = await client.request.invokeTemplate("filterTickets", {
-    context: { query: `created_at>'${today.toISOString().split('T')[0]}'` }
+    context: { query: `created_at:>'${today.toISOString().split('T')[0]}'` }
   });
   const response = JSON.parse(result.response); */
 
@@ -54,6 +59,7 @@ async function getTicketsToday() {
   const ticketContainer = document.querySelector(".ticket-container");
   ticketContainer.innerHTML = `<h2 class="section-heading">Today's Tickets (${tickets.length})</h2>`;
   for (let i = 0; i < tickets.length; i++) {
+    // Update UI for each ticket.
     const ticket = tickets[i];
     const compiled = compileTemplate(template, {
       ticketId: ticket.id,
@@ -62,10 +68,9 @@ async function getTicketsToday() {
     });
     ticketContainer.innerHTML += compiled;
   }
-  console.log(tickets);
 }
 
-async function populateKycTickets() {
+async function renderKYC() {
   const result = await client.request.invokeTemplate("getTickets", {
     context: { page: 1 }
   });
@@ -103,7 +108,7 @@ async function populateKycTickets() {
   children.forEach((child) => kycContainer.appendChild(child));
 }
 
-async function drawPerformanceGraph() {
+async function renderCREDPayConversions() {
   const domain = await this.client.iparams.get("backend_domain");
   // Comes from my own node JS backend. The backend has APIs to post sales and get them by month.
   const response = await fetch(`${domain.backend_domain}/sale`);
@@ -161,7 +166,7 @@ async function drawPerformanceGraph() {
   });
 }
 
-async function drawRatingGraph() {
+async function renderRatings() {
   const domain = await this.client.iparams.get("backend_domain");
   console.log(domain)
   const response = await fetch(`${domain.backend_domain}/rating`);
@@ -217,7 +222,7 @@ async function drawRatingGraph() {
   });
 }
 
-async function renderPaymentsData() {
+async function renderPaymentList() {
   const mockData = [
     {
       "name": "John Doe",
